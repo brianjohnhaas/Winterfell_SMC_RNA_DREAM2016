@@ -14,6 +14,6 @@ outputs:
   - id: output
     type: Directory
     outputBinding:
-      glob: "rsem_references"
+      glob: "RSEM_build"
 
 baseCommand: [tar, xzvf]

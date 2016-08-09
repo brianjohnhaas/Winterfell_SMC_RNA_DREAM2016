@@ -59,5 +59,5 @@ outputs:
 
 baseCommand: [rsem-calculate-expression]
 arguments:
-  - valueFrom: $(inputs.index.path + "/GRCh37")
+  - valueFrom: $(inputs.index.path + "/Homo_sapiens.GRCh37.75.gtf.inPrimary.gtf.cdna")
     position: 3

@@ -11,7 +11,7 @@ description: "Isoform quantification workflow"
 hints:
   - class: synData
     input: index
-    entity: syn6037390
+    entity: syn7115246
 
 inputs: 
 
