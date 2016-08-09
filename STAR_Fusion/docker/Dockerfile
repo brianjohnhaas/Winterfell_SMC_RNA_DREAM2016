@@ -11,13 +11,11 @@ WORKDIR /opt
 # star
 RUN wget https://github.com/alexdobin/STAR/archive/2.5.2a.tar.gz && \
     tar xvf 2.5.2a.tar.gz && \
-    cd STAR-2.5.2a && \
-    make && \
-    cp source/STAR /usr/local/bin
+    cp STAR-2.5.2a/bin/Linux_x86_64_static/STAR /usr/local/bin 
 
 # star-fusion
 RUN wget https://github.com/STAR-Fusion/STAR-Fusion/releases/download/v0.8.0/STAR-Fusion_v0.8.FULL.tar.gz && \
-    tar xvf STAR-Fusion_v0.8.FULL.tar.gz && \
+    tar xvf STAR-Fusion_v0.8.FULL.tar.gz 
     
 
 RUN cpan install Set::IntervalTree 

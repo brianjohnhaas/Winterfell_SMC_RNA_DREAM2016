@@ -2,4 +2,4 @@
 
 VERSION=$(cat VERSION)
 
-sudo docker build -t winterfelldream2016/fusionpipe:$VERSION --rm=true .
+docker build -t winterfelldream2016/fusionpipe:$VERSION --rm=true .
