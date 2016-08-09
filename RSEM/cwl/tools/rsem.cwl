@@ -7,7 +7,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: dreamchallenge/rsem
+    dockerPull: winterfelldream2016/expressionpipe
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 80000
