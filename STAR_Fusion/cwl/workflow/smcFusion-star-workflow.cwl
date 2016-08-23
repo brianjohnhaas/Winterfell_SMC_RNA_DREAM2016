@@ -1,10 +1,11 @@
 #!/usr/bin/env cwl-runner
 #
 # Authors: Thomas Yu, Ryan Spangler, Kyle Ellrott
+# modified by bhaas
 
 class: Workflow
 
-cwlVersion: "draft-3"
+cwlVersion: "v1.0"
 
 description:
   creates custom genome from reference genome and two phased VCF files SNPs and Indels
