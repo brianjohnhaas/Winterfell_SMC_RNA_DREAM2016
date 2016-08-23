@@ -7,8 +7,6 @@ class: Workflow
 
 cwlVersion: "v1.0"
 
-description:
-  creates custom genome from reference genome and two phased VCF files SNPs and Indels
 
 hints:
   - class: synData
@@ -17,71 +15,65 @@ hints:
 
 inputs: 
 
-  - id: index
-    type: File
+  index: File
 
-  - id: TUMOR_FASTQ_1
-    type: File
+  TUMOR_FASTQ_1: File
 
-  - id: TUMOR_FASTQ_2
-    type: File
+  TUMOR_FASTQ_2: File
     
 outputs:
 
-  - id: OUTPUT
+  OUTPUT:
     type: File
-    source: "#converttobedpe/fusionout"
+    outputSource: converttobedpe/fusionout
+
 
 steps:
 
-  - id: tar
+  tar:
     run: ../tools/tar.cwl
-    inputs:
-    - {id: index, source: "#index"}
-    outputs:
-    - {id: output}
+    in:
+      index_name: index
+    out: [output]
 
-  - id: star
+  star:
     run: ../tools/STAR.cwl
-    inputs:
-    - {id: twopassMode, default: Basic}
-    - {id: outReadsUnmapped, default: None}
-    - {id: chimSegmentMin, default: 12}
-    - {id: chimJunctionOverhangMin, default: 12}
-    - {id: alignSJDBoverhangMin, default: 10}
-    - {id: alignMatesGapMax, default: 200000}
-    - {id: alignIntronMax, default: 200000}
-    - {id: chimSegmentReadGapMax, default: parameter}
-    - {id: chim2, default: 3}
-    - {id: alignSJstitchMismatchNmax, default: 5}
-    - {id: align2, default: -1}
-    - {id: align3, default: 5}
-    - {id: align4, default: 5}
-    - {id: runThreadN, default: 5}
-    - {id: limitBAMsortRAM, default: "31532137230"}
-    - {id: outSAMtype, default: BAM}
-    - {id: outSAMsecond, default: SortedByCoordinate}
-    - {id: readFilesCommand, default: zcat}
-    - {id: index, source: "#tar/output"}
-    - {id: fastq1, source: "#TUMOR_FASTQ_1"}
-    - {id: fastq2, source: "#TUMOR_FASTQ_2"}
-    outputs:
-    - {id: output}
+    in:
+      twopassMode: { default: Basic }
+      outReadsUnmapped: { default: None } 
+      chimSegmentMin: { default: 12 }
+      chimJunctionOverhangMin: { default: 12 }
+      alignSJDBoverhangMin: { default: 10 }
+      alignMatesGapMax: { default: 200000 }
+      alignIntronMax: { default: 200000 }
+      chimSegmentReadGapMax: { default: parameter }
+      chim2: { default: 3 }
+      alignSJstitchMismatchNmax: { default: 5 }
+      align2: { default: -1 }
+      align3: { default: 5 }
+      align4: { default: 5 }
+      runThreadN: { default: 5 }
+      limitBAMsortRAM: { default: "31532137230" }
+      outSAMtype: { default: BAM }
+      outSAMsecond: { default: SortedByCoordinate }
+      readFilesCommand: { default: zcat }
+      index: tar/output
+      fastq1: TUMOR_FASTQ_1
+      fastq2: TUMOR_FASTQ_2
+    out: [output]
 
-  - id: starfusion
+  starfusion:
     run: ../tools/STAR-fusion.cwl
-    inputs:
-    - {id: index, source: "#tar/output"}
-    - {id: J, source: "#star/output"}
-    - {id: output_dir, default: starOut}
-    - {id: threads, default: 5}
-    outputs:
-    - {id: output}
+    in:
+      index: tar/output
+      J: star/output
+      output_dir: { default: "starOut" }
+      threads: { default: 5 }
+    out: [output]
 
-  - id: converttobedpe
+  converttobedpe:
     run: ../tools/converter.cwl
-    inputs:
-    - {id: input, source: "#starfusion/output"}
-    - {id: output, default: "output.bedpe"}
-    outputs:
-    - {id: fusionout}
+    in:
+      input: starfusion/output
+      output: { default: "output.bedpe" }
+    out: [fusionout]

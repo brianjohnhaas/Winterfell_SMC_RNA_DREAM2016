@@ -1,10 +1,9 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "draft-3"
+cwlVersion: "v1.0"
 
 class: CommandLineTool
 
-description: "Convert star fusion output to bedpe format"
 
 requirements:
   - class: InlineJavascriptRequirement

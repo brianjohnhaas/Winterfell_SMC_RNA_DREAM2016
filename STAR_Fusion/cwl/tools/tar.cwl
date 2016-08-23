@@ -6,7 +6,7 @@ class: CommandLineTool
 
 
 inputs:
-  - id: index
+  - id: index_name
     type: File
     inputBinding:
       position: 1
