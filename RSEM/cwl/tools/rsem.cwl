@@ -39,6 +39,12 @@ inputs:
       position: 0
       prefix: --strand-specific
 
+  - id: rspd
+    type: ["null",boolean]
+    inputBinding:
+      position: 0
+      prefix: --estimate-rspd
+
   - id: threads
     type: ["null",int]
     inputBinding:
@@ -49,6 +55,8 @@ inputs:
     type: string
     inputBinding:
       position: 4
+
+
 
 outputs:
   - id: output

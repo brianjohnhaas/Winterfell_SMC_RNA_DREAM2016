@@ -54,6 +54,7 @@ steps:
       threads: { default: 8 }
       pairedend: { default: true }
       strandspecific: { default: true }
+      rspd: { default: true }
     out: [output]
 
   convert:
