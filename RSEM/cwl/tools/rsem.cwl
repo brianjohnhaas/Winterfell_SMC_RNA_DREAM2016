@@ -7,7 +7,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: winterfelldream2016/expressionpipe
+    dockerPull: winterfelldream2016/expressionpipe:0.0.2
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 80000
@@ -44,6 +44,12 @@ inputs:
     inputBinding:
       position: 0
       prefix: --estimate-rspd
+
+  - id: bowtie2
+    type: ["null",boolean]
+    inputBinding:
+      position: 0
+      prefix: --bowtie2
 
   - id: threads
     type: ["null",int]

@@ -11,7 +11,7 @@ class: Workflow
 hints:
   - class: synData
     input: index
-    entity: syn7115246
+    entity: syn8276396
 
 inputs: 
   index: File
@@ -55,6 +55,7 @@ steps:
       pairedend: { default: true }
       strandspecific: { default: true }
       rspd: { default: true }
+      bowtie2: { default: true }
     out: [output]
 
   convert:
