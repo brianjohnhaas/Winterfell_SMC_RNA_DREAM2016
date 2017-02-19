@@ -1,0 +1,1 @@
+0.0.2: upgraded from star-fusion 0.8 to 1.0.0, and using samtools v1.3
