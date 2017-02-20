@@ -15,6 +15,6 @@ outputs:
   - id: output
     type: Directory
     outputBinding:
-      glob: "SMCRNA_DREAM2016_CTAT_GENOME_LIB"
+      glob: "SMCRNA_DREAM2017_CTAT_GENOME_LIB"
 
 baseCommand: [tar, xvzf]

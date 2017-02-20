@@ -8,7 +8,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: winterfelldream2016/fusionpipe
+    dockerPull: winterfelldream2016/fusionpipe:0.0.2
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 80000

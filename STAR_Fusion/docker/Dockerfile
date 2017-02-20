@@ -5,7 +5,10 @@ RUN apt-get update && apt-get install -y gcc g++ perl python automake make \
      bzip2 zlibc zlib1g zlib1g-dev  default-jre && \
      apt-get clean
 
-WORKDIR /opt
+ENV SRC /usr/local/src
+ENV BIN /usr/local/bin
+
+WORKDIR $SRC
 
 # star
 RUN wget https://github.com/alexdobin/STAR/archive/2.5.2a.tar.gz && \
@@ -34,5 +37,5 @@ RUN cpan install URI::Escape
 
 COPY convert_star_to_bedpe.py /usr/local/bin/
 
-ENV PATH /opt/STAR-Fusion_v1.0.0:/usr/local/bin/:/usr/bin:/bin
+ENV PATH $SRC/STAR-Fusion-v1.0.0:/usr/local/bin/:/usr/bin:/bin
 

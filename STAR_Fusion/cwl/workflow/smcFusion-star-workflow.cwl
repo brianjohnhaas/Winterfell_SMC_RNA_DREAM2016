@@ -11,7 +11,7 @@ cwlVersion: "v1.0"
 hints:
   - class: synData
     input: index
-    entity: syn7115377
+    entity: syn8280630
 
 inputs: 
 
@@ -67,6 +67,7 @@ steps:
     in:
       index: tar/output
       J: star/output
+      min_sum_frags: { default: 3 }
       output_dir: { default: "starOut" }
       threads: { default: 5 }
     out: [output]

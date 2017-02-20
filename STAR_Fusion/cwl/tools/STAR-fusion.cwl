@@ -7,7 +7,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: winterfelldream2016/fusionpipe
+    dockerPull: winterfelldream2016/fusionpipe:0.0.2
 
 inputs:
 
@@ -32,6 +32,13 @@ inputs:
     inputBinding:
       prefix: --CPU
       position: 2
+
+  - id: min_sum_frags
+    type: ["null",int]
+    inputBinding:
+      prefix: --min_sum_frags
+      position: 2
+
 
 outputs:
   - id: output
