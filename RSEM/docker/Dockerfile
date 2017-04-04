@@ -7,10 +7,7 @@ RUN apt-get install -y samtools wget bowtie2
 
 WORKDIR /opt
 
-RUN wget https://github.com/deweylab/RSEM/archive/v1.2.31.tar.gz && \
-    tar xvf v1.2.31.tar.gz  && \
-    cd RSEM-1.2.31/ && \
-    make && \
-    make install
-
-
+RUN wget https://github.com/deweylab/RSEM/archive/RSEM_beta.tar.gz && \
+    tar xvf RSEM_beta.tar.gz && \
+    cd RSEM-RSEM_beta && \
+    make && make install
