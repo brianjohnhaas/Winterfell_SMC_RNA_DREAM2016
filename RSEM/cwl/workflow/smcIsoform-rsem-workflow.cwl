@@ -56,6 +56,7 @@ steps:
       strandspecific: { default: true }
       rspd: { default: true }
       bowtie2: { default: true }
+      correct_GC_bias: { default: true }
     out: [output]
 
   convert:

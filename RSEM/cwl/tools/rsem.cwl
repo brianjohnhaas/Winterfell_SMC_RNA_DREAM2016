@@ -7,7 +7,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: winterfelldream2016/expressionpipe:0.0.2
+    dockerPull: winterfelldream2016/expressionpipe:beta_gc_bias_correct
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 80000
@@ -44,6 +44,18 @@ inputs:
     inputBinding:
       position: 0
       prefix: --estimate-rspd
+
+  - id: correct_GC_bias
+    type: ["null",boolean]
+    inputBinding:
+      position: 0
+      prefix: --correct-GC-bias
+
+  - id: correct_GC_bias_quantile
+    type: ["null",boolean]
+    inputBinding:
+      position: 0
+      prefix: --correct-GC-bias-quantile
 
   - id: bowtie2
     type: ["null",boolean]
