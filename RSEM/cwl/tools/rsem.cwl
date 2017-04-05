@@ -80,7 +80,7 @@ outputs:
   - id: output
     type: File
     outputBinding:
-      glob: $(inputs.output_filename + '.isoforms.results')
+      glob: $(inputs.output_filename + '_corrected.isoforms.results')
 
 
 baseCommand: [rsem-calculate-expression]
