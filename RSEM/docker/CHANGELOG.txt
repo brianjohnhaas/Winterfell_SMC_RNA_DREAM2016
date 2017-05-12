@@ -1,0 +1,5 @@
+beta_gc_bias_correct:  added Bo's new version w/ gc bias correction.  April 4 2017
+
+0.0.2 - updated to use bowtie2, Feb 17, 2017
+
+0.0.1 - initial version, using bowtie-1
