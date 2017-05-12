@@ -55,7 +55,6 @@ steps:
       pairedend: { default: true }
       strandspecific: { default: true }
       bowtie2: { default: true }
-      correct_GC_bias_quantile: { default: true }
     out: [output]
 
   convert:

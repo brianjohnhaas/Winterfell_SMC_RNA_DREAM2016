@@ -7,7 +7,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: winterfelldream2016/expressionpipe:beta_gc_bias_correct
+    dockerPull: winterfelldream2016/expressionpipe:rsem_beta_v3
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 80000
@@ -80,7 +80,7 @@ outputs:
   - id: output
     type: File
     outputBinding:
-      glob: $(inputs.output_filename + '_corrected_quantile.isoforms.results')
+      glob: $(inputs.output_filename + '.isoforms.results')
 
 
 baseCommand: [rsem-calculate-expression]

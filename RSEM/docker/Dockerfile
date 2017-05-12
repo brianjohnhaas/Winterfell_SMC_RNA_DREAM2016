@@ -8,9 +8,9 @@ RUN pip install pysam
 
 WORKDIR /opt
 
-RUN wget https://github.com/deweylab/RSEM/archive/RSEM_betav2.tar.gz && \
-    tar xvf RSEM_betav2.tar.gz && \
-    cd RSEM-RSEM_betav2 && \
+RUN wget https://github.com/deweylab/RSEM/archive/RSEM_betav3.tar.gz && \
+    tar xvf RSEM_betav3.tar.gz && \
+    cd RSEM-RSEM_betav3 && \
     make && make install && \
     cp *.py /usr/local/bin/
 
