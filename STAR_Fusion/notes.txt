@@ -1,0 +1,262 @@
+
+
+SMC-RNA submissions and scores:
+
+#3 (Ave F1 0.5973) https://github.com/smc-rna-challenge/bhaas-8281648
+#4 (Ave F1 0.5408) https://github.com/smc-rna-challenge/bhaas-9610021
+
+
+=====================================================================
+
+
+
+
+##########
+## 8281648
+
+main.cwl: 
+
+- id: star
+  in:
+  - {default: -1, id: align2}
+  - {default: 5, id: align3}
+  - {default: 5, id: align4}
+  - {default: 200000, id: alignIntronMax}
+  - {default: 200000, id: alignMatesGapMax}
+  - {default: 10, id: alignSJDBoverhangMin}
+  - {default: 5, id: alignSJstitchMismatchNmax}
+  - {default: 3, id: chim2}
+  - {default: 12, id: chimJunctionOverhangMin}
+  - {default: 12, id: chimSegmentMin}
+  - {default: parameter, id: chimSegmentReadGapMax}
+  - {id: fastq1, source: TUMOR_FASTQ_1}
+  - {id: fastq2, source: TUMOR_FASTQ_2}
+  - {id: index, source: tar/output}
+  - {default: '31532137230', id: limitBAMsortRAM}
+  - {default: None, id: outReadsUnmapped}
+  - {default: SortedByCoordinate, id: outSAMsecond}
+  - {default: BAM, id: outSAMtype}
+  - {default: zcat, id: readFilesCommand}
+  - {default: 5, id: runThreadN}
+  - {default: Basic, id: twopassMode}
+  out: [output]
+  run: STAR.cwl
+- id: starfusion
+  in:
+  - {id: J, source: star/output}
+  - {id: index, source: tar/output}
+  - {default: 3, id: min_sum_frags}
+  - {default: starOut, id: output_dir}
+  - {default: 5, id: threads}
+  out: [output]
+  run: STAR-fusion.cwl
+
+
+inputs.json:
+
+{
+    "TUMOR_FASTQ_2": {
+        "path": "data/sim31_mergeSort_2.fq.gz", 
+        "class": "File"
+    }, 
+    "TUMOR_FASTQ_1": {
+        "path": "data/sim31_mergeSort_1.fq.gz", 
+        "class": "File"
+    }, 
+    "index": "SMCRNA_DREAM2017_CTAT_GENOME_LIB.tar.gz", 
+    "REFERENCE_GTF": {
+        "path": "data/Homo_sapiens.GRCh37.75.gtf", 
+        "class": "File"
+    }, 
+    "REFERENCE_GENOME": {
+        "path": "data/Homo_sapiens.GRCh37.75.dna_sm.primary_assembly.fa", 
+        "class": "File"
+    }
+}
+
+STAR-fusion.cwl:
+
+arguments:
+- {position: 0, prefix: --genome_lib_dir, valueFrom: $(inputs.index.path)}
+baseCommand: [STAR-Fusion]
+class: CommandLineTool
+cwlVersion: v1.0
+hints: []
+inputs:
+- {id: index, type: Directory}
+- id: J
+  inputBinding: {position: 1, prefix: -J}
+  type: File
+- id: output_dir
+  inputBinding: {position: 2, prefix: --output_dir}
+  type: string
+- id: threads
+  inputBinding: {position: 2, prefix: --CPU}
+  type: ['null', int]
+- id: min_sum_frags
+  inputBinding: {position: 2, prefix: --min_sum_frags}
+  type: ['null', int]
+name: STAR-fusion.cwl
+outputs:
+- id: output
+  outputBinding: {glob: $(inputs.output_dir+'/star-fusion.fusion_candidates.final.abridged')}
+  type: File
+package: file:///home/bhaas/Winterfell_SMC_RNA_DREAM2016/STAR_Fusion/cwl/tools/STAR-fusion.cwl
+requirements:
+- {class: InlineJavascriptRequirement}
+- {class: DockerRequirement, dockerPull: 'winterfelldream2016/fusionpipe:0.0.2'}
+
+
+
+
+##=================================================================================
+
+##########
+## 9610021
+
+main.cwl:
+
+- id: star
+  in:
+  - {default: -1, id: align2}
+  - {default: 5, id: align3}
+  - {default: 5, id: align4}
+  - {default: 200000, id: alignIntronMax}
+  - {default: 200000, id: alignMatesGapMax}
+  - {default: 10, id: alignSJDBoverhangMin}
+  - {default: 5, id: alignSJstitchMismatchNmax}
+  - {default: 3, id: chim2}
+  - {default: 10, id: chimJunctionOverhangMin}
+  - {default: 10, id: chimSegmentMin}
+  - {default: parameter, id: chimSegmentReadGapMax}
+  - {id: fastq1, source: TUMOR_FASTQ_1}
+  - {id: fastq2, source: TUMOR_FASTQ_2}
+  - {id: index, source: tar/output}
+  - {default: '31532137230', id: limitBAMsortRAM}
+  - {default: None, id: outReadsUnmapped}
+  - {default: SortedByCoordinate, id: outSAMsecond}
+  - {default: BAM, id: outSAMtype}
+  - {default: zcat, id: readFilesCommand}
+  - {default: 5, id: runThreadN}
+  - {default: Basic, id: twopassMode}
+  out: [output]
+  run: STAR.cwl
+- id: starfusion
+  in:
+  - {id: J, source: star/output}
+  - {id: index, source: tar/output}
+  - {default: 2, id: min_sum_frags}
+  - {default: starOut, id: output_dir}
+  - {default: 5, id: threads}
+  out: [output]
+  run: STAR-fusion.cwl
+
+
+inputs.json:
+
+{
+    "TUMOR_FASTQ_2": {
+        "path": "data/sim31_mergeSort_2.fq.gz", 
+        "class": "File"
+    }, 
+    "TUMOR_FASTQ_1": {
+        "path": "data/sim31_mergeSort_1.fq.gz", 
+        "class": "File"
+    }, 
+    "index": "SMCRNA_DREAM2017_CTAT_GENOME_LIB.tar.gz", 
+    "REFERENCE_GTF": {
+        "path": "data/Homo_sapiens.GRCh37.75.gtf", 
+        "class": "File"
+    }, 
+    "REFERENCE_GENOME": {
+        "path": "data/Homo_sapiens.GRCh37.75.dna_sm.primary_assembly.fa", 
+        "class": "File"
+    }
+}
+
+
+STAR-fusion.cwl:
+
+arguments:
+- {position: 0, prefix: --genome_lib_dir, valueFrom: $(inputs.index.path)}
+baseCommand: [STAR-Fusion]
+class: CommandLineTool
+cwlVersion: v1.0
+hints: []
+inputs:
+- {id: index, type: Directory}
+- id: J
+  inputBinding: {position: 1, prefix: -J}
+  type: File
+- id: output_dir
+  inputBinding: {position: 2, prefix: --output_dir}
+  type: string
+- id: threads
+  inputBinding: {position: 2, prefix: --CPU}
+  type: ['null', int]
+- id: min_sum_frags
+  inputBinding: {position: 2, prefix: --min_sum_frags}
+  type: ['null', int]
+name: STAR-fusion.cwl
+outputs:
+- id: output
+  outputBinding: {glob: $(inputs.output_dir+'/star-fusion.fusion_candidates.final.abridged')}
+  type: File
+package: file:///home/bhaas/Winterfell_SMC_RNA_DREAM2016/STAR_Fusion/cwl/tools/STAR-fusion.cwl
+requirements:
+- {class: InlineJavascriptRequirement}
+- {class: DockerRequirement, dockerPull: 'winterfelldream2016/fusionpipe:0.0.2'}
+
+
+
+
+
+
+#####################################################################################
+#
+#  Summary:
+#
+#  uses: STAR-2.5.2a
+#        STAR-Fusion v1.0.0
+#
+#
+#  ctat_genome_lib:  SMCRNA_DREAM2017_CTAT_GENOME_LIB.tar.gz
+#
+#
+
+
+## parameterization differences:
+
+# 8281648
+---------
+STAR: 
+12, id: chimJunctionOverhangMin
+12, id: chimSegmentMin
+
+STAR-Fusion:
+3, id: min_sum_frags
+
+Leaderboard:
+bhaas
+Winterfell Fusion Feb-2017
+F1: 0.5973811222795511
+calls: 936
+TP: 396
+
+
+# 9610021
+---------
+STAR:
+10, id: chimJunctionOverhangMin
+10, id: chimSegmentMin
+
+STAR-Fusion:
+2, id: min_sum_frags
+
+
+Leaderboard:
+bhaas
+smcFusion.May2017.Winterfell.packed.cwl
+F1: 0.5408447954608412
+Calls: 1292
+TP: 429
