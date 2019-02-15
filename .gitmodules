@@ -1,0 +1,6 @@
+[submodule "STAR_Fusion/bhaas-8281648"]
+	path = STAR_Fusion/bhaas-8281648
+	url = git@github.com:smc-rna-challenge/bhaas-8281648.git
+[submodule "STAR_Fusion/bhaas-9610021"]
+	path = STAR_Fusion/bhaas-9610021
+	url = git@github.com:smc-rna-challenge/bhaas-9610021.git
